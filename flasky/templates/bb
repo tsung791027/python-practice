@@ -1,0 +1,8 @@
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filname='favicon.ico') }}"
+    type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filname='favicon.ico') }}"
+    type="image/x-icon">
+{% endblock %}
+<p>The local data and time is {{ moment(current_time).format('LLL') }}.</p>
