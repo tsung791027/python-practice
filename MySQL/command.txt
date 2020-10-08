@@ -46,3 +46,6 @@ select * from employee where NOT title="Software Architect" or salary="6000"
 
 ("Pirates of the Caribbean: Dead Man's Chest", 2006, "Gore Verbinski", "Johnny Depp", "Orlando Bloom", 151, "USA", "PG-13", 423032628, 7.3),
 ("Quantum of Solace", 2008, "Marc Forster", "Giancarlo Giannini", "Mathieu Amalric", 106, "UK", "PG-13", 168368427, 6.7),
+CRUD
+update table set column1_name where column1_name=
+delete from table where column1_name
