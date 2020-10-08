@@ -1,0 +1,48 @@
+基本操作cmd
+show databases; 顯示所有的database
+create database <name>; 創建新的db
+use <database name>; 使用db
+select database(); 目前使用的db
+drop database <database name>; 刪除db
+
+
+Table comand
+show table;
+show columns from <table name>;
+desc <table name>;
+drop <table name>;
+
+insert into <table name>(column1_name,column2_name)
+values(column1_name,column2_name)
+
+primary key (column1_name)
+auto_increment
+1. Column如果設置成AUTO_INCREMENT，則這個Column必須同時是PRIMARY KEY 或者 UNIQUE其中一個
+2. 多個Column可以做聯合PRIMRY KEY，即連和起來不重複即可
+
+primary key (column1_name)
+primary key VS unique
+比較
+ex:
+create table person(a INT PRIMARY KEY, b VARCH(10) UNIQUE);
+
+PRIMARY KEY 不行為null
+UNIQUE 可以為unll
+但兩者都會要求唯一性
+
+
+source .sql檔案的path
+
+
+select * from <table name> 表示顯示table name 所有colunms
+當然*可以以table 其中的column代替 就會單獨顯示數據
+
+
+select * from employee where title="Database Administrator"
+select * from employee where title="Database Administrator" and salary="6000"
+
+select * from employee where title="Software Architect" or salary="6000"
+select * from employee where NOT title="Software Architect" or salary="6000"
+
+("Pirates of the Caribbean: Dead Man's Chest", 2006, "Gore Verbinski", "Johnny Depp", "Orlando Bloom", 151, "USA", "PG-13", 423032628, 7.3),
+("Quantum of Solace", 2008, "Marc Forster", "Giancarlo Giannini", "Mathieu Amalric", 106, "UK", "PG-13", 168368427, 6.7),
