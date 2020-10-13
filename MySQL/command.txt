@@ -78,3 +78,23 @@ select replace('hello world', "world", "MYSQL);
 
 upper and lower 字串轉換成大小寫(其中字串中有數字或是符號 則只會轉換字串)
 select upper('hello MYSQL');
+
+
+select distinct title from employee;
++------------------------+
+| title                  |
++------------------------+
+| Software Engineer      |
+| Software Architect     |
+| Database Administrator |
+| Project Manager        |
+| Test Engineer          |
++------------------------+
+5 rows in set (0.37 sec)
+
+mysql> select count(distinct title) from employee;
++-----------------------+
+| count(distinct title) |
++-----------------------+
+|                     5 |
++-----------------------+

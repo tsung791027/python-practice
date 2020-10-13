@@ -20,9 +20,10 @@
 --     from movie
 --     order by title;
 
-SELECT
-    title, title_year, imdb_score
-    from movie
-    where director_name='Christopher Nolan'
-    order by imdb_score desc
-    limit 1;
+-- SELECT
+--     title, title_year, imdb_score
+--     from movie
+--    where director_name='Christopher Nolan'
+--     order by imdb_score desc
+--     limit 1;
+
