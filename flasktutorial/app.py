@@ -7,6 +7,7 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_mail import Mail, Message
+from threading import Thread
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -23,6 +24,7 @@ app.config['MAIL_USERNAME'] = 'jasperli0407@gmail.com'
 app.config['MAIL_PASSWORD'] = 'Tsung791027'
 app.config['FLASKY_MAIL_SUBJECT_PREFIX'] = '[Flasky]'
 app.config['FLASKY_SENDER'] = 'Jasper Li <jasperli0407@gmail.com>'
+app.config['FLASKY_AMDIN'] = os.environ.get('FLASKY_ADMIN')
 
 
 
@@ -44,6 +46,9 @@ def index():
             db.session.add(user)
             db.session.commit()
             session['known'] = False
+            if app.config['FLASKY_AMDIN']:
+                send_email(app.config['FLASKY_AMDIN'], 'New User',
+                           'mail/new_user', user=user)
         else:
             session['known'] = True
         session['name'] = form.name.data
@@ -77,14 +82,21 @@ def internal_server_error(e):
 def make_shell_context():
     return dict(db=db, User=User, Role=Role)
 
-@app.route('/message')
+def send_async_email(app, msg):
+    with app.app_context():
+        mail.send(msg)
+
 def send_email():
     msg = Message(app.config['FLASKY_MAIL_SUBJECT_PREFIX'] ,
                   sender=app.config['FLASKY_SENDER'], recipients=['jasperli0407@gmail.com'])
     #msg.body = render_template(template + '.txt', **kwargs)
     #msg.html = render_template(template + '.html', **kwargs)
-    mail.send(msg)
-    return 'You Send Mail by Flask-Mail Success!!'
+    thr = Thread(target=send_async_email, args=[app, msg])
+    thr.start()
+    return thr
+    #return 'You Send Mail by Flask-Mail Success!!'
+
+
 
 class NameForm(FlaskForm):
     name = StringField('What is your name?', validators=[DataRequired()])
