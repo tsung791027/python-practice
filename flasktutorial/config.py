@@ -13,6 +13,8 @@ class Config:
     FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
     FLASKY_MAIL_SENDER = 'Jasper Li<jasperli0407@gmail.com>'
     FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_RECORD_QUERIES = True
 
     @staticmethod
     def init_app(app):
@@ -26,7 +28,7 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URL = os.environ.get('TEST_DATABASE_URL') or \
-        'sqlite:///'
+        'sqlite://'
 
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URL = os.environ.get('DATABASE_URL') or \
